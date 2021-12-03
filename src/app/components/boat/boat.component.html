@@ -1,5 +1,11 @@
 <div class="boat" [style.left]="boatX$ | async" [style.top]="boatY$ | async">
-  <img src="../../../assets/ship.png" alt="boat" width="40" height="40" />
+  <img
+    src="../../../assets/ship.png"
+    alt="boat"
+    width="40"
+    height="40"
+    [style.transform]="(rotationY$ | async)"
+  />
   <span
     class="trash-radar"
     [style.width]="(trashReach$ | async) + 'px'"

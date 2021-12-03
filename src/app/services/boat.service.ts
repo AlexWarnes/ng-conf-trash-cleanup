@@ -56,6 +56,8 @@ export class BoatService {
   public boatPosition$ = this._boatPosition
     .asObservable()
     .pipe(filter((p) => !!p));
+  private _boatDirection = new BehaviorSubject<'right' | 'left'>('right');
+  public boatDirection$ = this._boatDirection.asObservable();
 
   public moveNumber$ = this.boatPosition$.pipe(
     scan((count: number) => count + 1, -1)
@@ -82,7 +84,17 @@ export class BoatService {
 
   updateBoatPosition(newPosition: Position): void {
     if (!this.recycleInProgress$.value) {
+      this._boatDirection.next(this.updateBoatDirection(newPosition));
       this._boatPosition.next({ x: newPosition.x - 20, y: newPosition.y - 20 });
+    }
+  }
+
+  updateBoatDirection(nextPosition: Position): 'right' | 'left' {
+    const currentPosition = this._boatPosition.value;
+    if (currentPosition && nextPosition.x < currentPosition.x) {
+      return 'left';
+    } else {
+      return 'right';
     }
   }
 
