@@ -1,0 +1,26 @@
+.boat {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s ease-in-out;
+}
+
+.trash-radar {
+  width: 40px;
+  height: 2px;
+  background: black;
+  z-index: 1;
+  border: 1px solid #000000;
+  box-shadow: 0 34px 8px #000000;
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  transform-origin: left;
+
+  &.active {
+    opacity: 1;
+    transform: rotate(360deg);
+    animation: TrashRadar 175ms linear 0s infinite;
+  }
+}

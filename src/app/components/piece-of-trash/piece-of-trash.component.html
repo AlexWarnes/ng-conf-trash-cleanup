@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="trash.type">
+  <img
+    *ngSwitchCase="'CHEMICAL'"
+    src="../../../assets/chemical.png"
+    alt="Chemical"
+    class="trash-item"
+    [style.left]="trash.position.x + 'px'"
+    [style.top]="trash.position.y + 'px'"
+  />
+  <img
+    *ngSwitchCase="'PLASTIC'"
+    src="../../../assets/plastic.png"
+    alt="Plastic"
+    class="trash-item"
+    [style.left]="trash.position.x + 'px'"
+    [style.top]="trash.position.y + 'px'"
+  />
+  <img
+    *ngSwitchCase="'GLASS'"
+    src="../../../assets/glass.png"
+    alt="Glass"
+    class="trash-item"
+    [style.left]="trash.position.x + 'px'"
+    [style.top]="trash.position.y + 'px'"
+  />
+</ng-container>
