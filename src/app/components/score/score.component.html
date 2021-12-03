@@ -1,0 +1,21 @@
+<div class="score-container">
+  <h2>BOAT STORAGE</h2>
+  <div class="row">
+    <img src="../../../assets/chemical.png" alt="chemical" width="16px">
+    <p [ngClass]="{
+      full: (boatStorage$ | async).CHEMICAL.storedUnits >= (boatStorage$ | async).CHEMICAL.maxUnits
+    }">{{(boatStorage$ | async).CHEMICAL.storedUnits}} / {{(boatStorage$ | async).CHEMICAL.maxUnits}}</p>
+  </div>
+  <div class="row">
+    <img src="../../../assets/plastic.png" alt="plastic" width="16px">
+    <p [ngClass]="{
+      full: (boatStorage$ | async).PLASTIC.storedUnits >= (boatStorage$ | async).PLASTIC.maxUnits
+    }">{{(boatStorage$ | async).PLASTIC.storedUnits}} / {{(boatStorage$ | async).PLASTIC.maxUnits}}</p>
+  </div>
+  <div class="row">
+    <img src="../../../assets/glass.png" alt="glass" width="16px">
+    <p [ngClass]="{
+      full: (boatStorage$ | async).GLASS.storedUnits >= (boatStorage$ | async).GLASS.maxUnits
+    }">{{(boatStorage$ | async).GLASS.storedUnits}} / {{(boatStorage$ | async).GLASS.maxUnits}}</p>
+  </div>
+</div>

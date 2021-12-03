@@ -7,6 +7,7 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { BoatComponent } from './components/boat/boat.component';
 import { PieceOfTrashComponent } from './components/piece-of-trash/piece-of-trash.component';
 import { BinComponent } from './components/bin/bin.component';
+import { ScoreComponent } from './components/score/score.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BinComponent } from './components/bin/bin.component';
     TitleBarComponent,
     BoatComponent,
     PieceOfTrashComponent,
-    BinComponent
+    BinComponent,
+    ScoreComponent
   ],
   imports: [
     BrowserModule,

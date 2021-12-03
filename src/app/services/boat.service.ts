@@ -108,6 +108,7 @@ export class BoatService {
       )
       .subscribe(() => {
         console.log('Recycling Complete');
+        // Do something cool
       });
   }
 }
