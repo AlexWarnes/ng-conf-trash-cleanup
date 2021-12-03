@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { BoatComponent } from './components/boat/boat.component';
 import { PieceOfTrashComponent } from './components/piece-of-trash/piece-of-trash.component';
+import { BinComponent } from './components/bin/bin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleBarComponent,
     BoatComponent,
-    PieceOfTrashComponent
+    PieceOfTrashComponent,
+    BinComponent
   ],
   imports: [
     BrowserModule,

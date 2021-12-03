@@ -10,3 +10,14 @@ export interface TrashItem {
   type: TrashType;
   position: Position;
 }
+
+export interface StorageData {
+  storedUnits: number;
+  maxUnits: number;
+}
+
+export interface BoatStorage {
+  PLASTIC: StorageData;
+  GLASS: StorageData;
+  CHEMICAL: StorageData;
+}

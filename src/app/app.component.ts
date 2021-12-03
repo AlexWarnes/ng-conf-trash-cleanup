@@ -19,10 +19,11 @@ export class AppComponent implements OnInit, OnDestroy {
   trashInterval: any = null;
 
   ngOnInit(): void {
-    this.BOAT.collisionDetected$.subscribe(trashFound => {
-      for (let trash of trashFound){
-        // if(this.BOAT.hasCapacityFor(trash.type))
-        this.TRASH.pickUpTrashItem(trash.id);
+    this.BOAT.collisionDetected$.subscribe((trashFound) => {
+      for (let trash of trashFound) {
+        if (this.BOAT.hasCapacityFor(trash.type)) {
+          this.BOAT.collectTrash(trash);
+        }
       }
     });
     this.BOAT.updateBoatPosition({
@@ -30,9 +31,10 @@ export class AppComponent implements OnInit, OnDestroy {
       y: window.innerHeight / 2,
     });
 
+    this.TRASH.generateNewTrash();
     this.trashInterval = setInterval(() => {
       this.TRASH.generateNewTrash();
-    }, 1500);
+    }, 2000);
   }
 
   ngOnDestroy(): void {

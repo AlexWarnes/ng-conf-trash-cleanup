@@ -1,5 +1,6 @@
 <app-title-bar></app-title-bar>
 <div class="ocean" (click)="handleOceanClick($event)">
+  <app-bin></app-bin>
   <app-boat></app-boat>
   <ng-container *ngFor="let trash of trashItems$ | async">
     <app-piece-of-trash [trash]="trash"></app-piece-of-trash>

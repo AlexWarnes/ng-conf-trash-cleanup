@@ -9,15 +9,6 @@ import { TrashService } from './trash.service';
 export class CollisionService {
   constructor() {}
 
-  // collisionDetected$ = this.BOAT.boatPosition$.pipe(
-  //   tap(() => this.searchingForTrash$.next(true)),
-  //   debounceTime(1500),
-  //   withLatestFrom(this.TRASH.trashItems$),
-  //   map(([boatPosition, trashItems]) => {
-  //     return this.trashFound(boatPosition, trashItems);
-  //   })
-  // );
-
   trashFound(boatPosition: Position, trashItems: TrashItem[]): TrashItem[] {
     const foundTrash = [];
     for (let trash of trashItems) {
