@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ng-conf-trash-cleanup": {
+      "hosting": {
+        "ng-conf-trash-cleanup": [
+          "ng-conf-trash-cleanup"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ng-conf-trash-cleanup"
+  }
+}

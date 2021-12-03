@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "ng-conf-trash-cleanup:build:production",
+            "firebaseProject": "ng-conf-trash-cleanup",
+            "firebaseHostingSite": "ng-conf-trash-cleanup"
+          }
         }
       }
     }
