@@ -1,0 +1,9 @@
+<div class="instruction-box" *ngIf="showInstruction$ | async">
+  <ng-container [ngSwitch]="showInstruction$ | async">
+    <p *ngSwitchCase="'STEP_1'">1. Click to move your boat near trash</p>
+    <p *ngSwitchCase="'STEP_2'">2. Empty your boat's trash at the DROP OFF</p>
+    <p *ngSwitchCase="'STEP_3'">
+      3. As new donations come in, your capabilities improve!
+    </p>
+  </ng-container>
+</div>

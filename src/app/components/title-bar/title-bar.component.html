@@ -6,13 +6,18 @@
     href="https://teamseas.org/"
     target="_blank"
     rel="noopener noreferrer"
-    >#TeamSeas</a
   >
+    <img src="../../../assets/teamseas.png" alt="Team Seas Logo" width="24" />
+    <span *ngIf="(displayType$ | async) === 'DESKTOP'" class="link-text"
+      >#TeamSeas</span
+    >
+  </a>
   <a
     class="github link-btn btn primary"
     href="https://github.com/alexwarnes"
     target="_blank"
     rel="noopener noreferrer"
-    >GitHub</a
   >
+    <img src="../../../assets/github.svg" alt="GitHub Logo" width="24" />
+  </a>
 </nav>

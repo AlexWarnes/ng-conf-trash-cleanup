@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { Donation } from './DataModels';
 import { BoatService } from './services/boat.service';
 import { CollisionService } from './services/collision.service';
 import { TrashService } from './services/trash.service';
@@ -35,6 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.trashInterval = setInterval(() => {
       this.TRASH.generateNewTrash();
     }, 2000);
+
+
   }
 
   ngOnDestroy(): void {

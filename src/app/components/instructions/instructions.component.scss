@@ -1,0 +1,14 @@
+.instruction-box {
+  background: whitesmoke;
+  width: 300px;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 105%;
+  z-index: 30;
+  padding: 0.5rem;
+  left: -2px;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-size: .75rem;
+  line-height: 1rem;
+}

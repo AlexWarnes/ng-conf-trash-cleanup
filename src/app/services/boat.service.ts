@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, timer } from 'rxjs';
+import { BehaviorSubject, from, Observable, of, Subject, timer } from 'rxjs';
 import {
   BoatStorage,
+  Donation,
   Position,
   StorageData,
   TrashItem,
@@ -15,9 +16,15 @@ import {
   map,
   delay,
   switchMap,
+  scan,
+  startWith,
+  take,
+  skip,
+  concatMap,
 } from 'rxjs/operators';
 import { TrashService } from './trash.service';
 import { CollisionService } from './collision.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +32,16 @@ import { CollisionService } from './collision.service';
 export class BoatService {
   constructor(
     private TRASH: TrashService,
-    private COLLISION: CollisionService
+    private COLLISION: CollisionService,
+    private HTTP: HttpClient
   ) {}
 
   public searchingForTrash$ = new Subject();
   private _recycleInProgress = new BehaviorSubject(false);
+  private _latestDonation = new BehaviorSubject<Donation>(null);
+  public latestDonation$ = this._latestDonation
+    .asObservable()
+    .pipe(filter((d) => !!d));
   defaultBoatStorage: BoatStorage = {
     PLASTIC: { storedUnits: 0, maxUnits: 2 } as StorageData,
     GLASS: { storedUnits: 0, maxUnits: 2 } as StorageData,
@@ -44,6 +56,10 @@ export class BoatService {
   public boatPosition$ = this._boatPosition
     .asObservable()
     .pipe(filter((p) => !!p));
+
+  public moveNumber$ = this.boatPosition$.pipe(
+    scan((count: number) => count + 1, -1)
+  );
 
   collisionDetected$ = this.boatPosition$.pipe(
     debounceTime(1000),
@@ -98,8 +114,8 @@ export class BoatService {
 
   initRecycling(): void {
     timer(1000)
-    .pipe(
-      tap(() => {
+      .pipe(
+        tap(() => {
           this._recycleInProgress.next(true);
           this.decrementBoatStorage();
         }),
@@ -108,7 +124,38 @@ export class BoatService {
       )
       .subscribe(() => {
         console.log('Recycling Complete');
-        // Do something cool
+        // TODO: something cool
       });
+  }
+
+  getLatestDonations(): Observable<Donation> {
+    return this.HTTP.get<any>('https://tscache.com/lb_recent.json').pipe(
+      map((response) => response.recent),
+      switchMap((donations: Donation[]) => {
+        // Emit a donation every 10 seconds
+        return from(donations).pipe(
+          concatMap((donation) => {
+            return of(donation).pipe(delay(10000));
+          })
+        );
+      })
+    );
+  }
+
+  handleIncomingDonation(donation: Donation) {
+    this._latestDonation.next(donation);
+
+    this.boostMaxStorage();
+    this.COLLISION.incrementReach();
+  }
+
+  boostMaxStorage(): void {
+    const previousStorage = this._boatStorage.value;
+    let nextStorage = { ...previousStorage };
+    nextStorage.CHEMICAL.maxUnits = nextStorage.CHEMICAL.maxUnits + 1;
+    nextStorage.PLASTIC.maxUnits = nextStorage.PLASTIC.maxUnits + 1;
+    nextStorage.GLASS.maxUnits = nextStorage.GLASS.maxUnits + 1;
+
+    this._boatStorage.next(nextStorage);
   }
 }

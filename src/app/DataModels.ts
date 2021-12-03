@@ -21,3 +21,15 @@ export interface BoatStorage {
   GLASS: StorageData;
   CHEMICAL: StorageData;
 }
+
+export interface Donation {
+  created_at: number;
+  ff: number;
+  flair: string;
+  is_gift: number;
+  message_public: string;
+  name: string;
+  pounds: string;
+  pounds_color: string;
+  team_name: string;
+}

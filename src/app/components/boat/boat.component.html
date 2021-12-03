@@ -1,7 +1,8 @@
 <div class="boat" [style.left]="boatX$ | async" [style.top]="boatY$ | async">
-  <img src="../../../assets/boat.svg" alt="boat" width="40" height="40" />
+  <img src="../../../assets/ship.png" alt="boat" width="40" height="40" />
   <span
     class="trash-radar"
+    [style.width]="(trashReach$ | async) + 'px'"
     [ngClass]="{ active: (searchingForTrash$ | async) === true }"
   ></span>
 </div>

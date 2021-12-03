@@ -39,6 +39,9 @@ p {
 .btn {
   padding: 1rem 1.5rem;
   border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   &:hover {
     cursor: pointer;
   }

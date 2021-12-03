@@ -1,25 +1,36 @@
 .score-container {
   position: absolute;
-  left: 0;
+  left: 5px;
+  bottom: 5px;
+  width: 100%;
+  max-width: 300px;
+  min-height: 175px;
   z-index: 2;
   background: #eee8aa;
   border: 3px solid #cd5c5c;
-  padding: 1rem;
+  padding: .5rem;
   border-radius: 4px;
 }
 
 .row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin: 1rem 0;
 
   p.full {
     color: red;
   }
+  p {
+    margin: 0 0 0 1rem;
+  }
 }
 
 h2 {
   font-size: 1.1rem;
   margin: 0;
+}
+
+.donation-text {
+  font-size: .75rem;
 }
