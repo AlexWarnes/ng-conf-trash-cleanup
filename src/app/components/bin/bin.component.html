@@ -1,9 +1,12 @@
-<div class="bin-area" (click)="handleRecycleClick()">
-  <h2>DROP OFF</h2>
+<div class="bin-area">
+  <h2>{{ (recycleInProgress$ | async) ? "RECYCLING..." : "DROP OFF" }}</h2>
   <img
     src="../../../assets//bin.png"
     alt="recycle bin"
     width="40"
     height="40"
+    [ngClass]="{
+      tada: (recycleInProgress$ | async)
+    }"
   />
 </div>

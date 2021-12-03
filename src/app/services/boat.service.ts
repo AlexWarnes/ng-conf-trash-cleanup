@@ -37,7 +37,7 @@ export class BoatService {
   ) {}
 
   public searchingForTrash$ = new Subject();
-  private _recycleInProgress = new BehaviorSubject(false);
+  public recycleInProgress$ = new BehaviorSubject(false);
   private _latestDonation = new BehaviorSubject<Donation>(null);
   public latestDonation$ = this._latestDonation
     .asObservable()
@@ -73,8 +73,15 @@ export class BoatService {
     filter((trashFound) => trashFound.length > 0)
   );
 
+  recycleZoneDetected$ = this.boatPosition$.pipe(
+    debounceTime(1000),
+    map((position) => {
+      return position.y <= 170;
+    })
+  );
+
   updateBoatPosition(newPosition: Position): void {
-    if (!this._recycleInProgress.value) {
+    if (!this.recycleInProgress$.value) {
       this._boatPosition.next({ x: newPosition.x - 20, y: newPosition.y - 20 });
     }
   }
@@ -113,19 +120,12 @@ export class BoatService {
   }
 
   initRecycling(): void {
-    timer(1000)
-      .pipe(
-        tap(() => {
-          this._recycleInProgress.next(true);
-          this.decrementBoatStorage();
-        }),
-        switchMap(() => timer(500)),
-        tap(() => this._recycleInProgress.next(false))
-      )
-      .subscribe(() => {
-        console.log('Recycling Complete');
-        // TODO: something cool
-      });
+    this.recycleInProgress$.next(true);
+    timer(1000).subscribe(() => {
+      this.decrementBoatStorage();
+      this.recycleInProgress$.next(false);
+      // TODO: something cool
+    });
   }
 
   getLatestDonations(): Observable<Donation> {

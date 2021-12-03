@@ -12,11 +12,16 @@ export class BinComponent implements OnInit {
     private BOAT: BoatService
   ) { }
 
-  ngOnInit(): void {
-  }
+  recycleInProgress$ = this.BOAT.recycleInProgress$
 
-  handleRecycleClick(){
-    this.BOAT.initRecycling();
+  ngOnInit(): void {
+    this.BOAT.recycleZoneDetected$.subscribe(recycleZone => {
+      console.log("recycleZoneDetected$", recycleZone)
+      if(recycleZone){
+        this.BOAT.initRecycling();
+      }
+    })
+
   }
 
 }
