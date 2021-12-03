@@ -141,10 +141,10 @@ export class BoatService {
     return this.HTTP.get<any>('https://tscache.com/lb_recent.json').pipe(
       map((response) => response.recent),
       switchMap((donations: Donation[]) => {
-        // Emit a donation every 10 seconds
+        // Emit a donation every 30 seconds
         return from(donations).pipe(
           concatMap((donation) => {
-            return of(donation).pipe(delay(10000));
+            return of(donation).pipe(delay(30000));
           })
         );
       })
