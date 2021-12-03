@@ -17,9 +17,6 @@ import {
   delay,
   switchMap,
   scan,
-  startWith,
-  take,
-  skip,
   concatMap,
 } from 'rxjs/operators';
 import { TrashService } from './trash.service';

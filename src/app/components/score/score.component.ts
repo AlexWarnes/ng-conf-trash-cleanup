@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Donation } from 'src/app/DataModels';
 import { BoatService } from 'src/app/services/boat.service';
 
 @Component({

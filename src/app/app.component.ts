@@ -1,9 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { Donation } from './DataModels';
 import { BoatService } from './services/boat.service';
-import { CollisionService } from './services/collision.service';
 import { TrashService } from './services/trash.service';
 
 @Component({
@@ -15,7 +11,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private BOAT: BoatService,
     private TRASH: TrashService,
-    private COLLISION: CollisionService
   ) {}
   trashItems$ = this.TRASH.trashItems$;
   trashInterval: any = null;
